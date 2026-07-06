@@ -1,0 +1,7 @@
+/home/prachi/Discovery/2026_3/spring-dsl-flow/src/main/java/com/demo/SpringIntegrationDemoApplication.java
+/home/prachi/Discovery/2026_3/spring-dsl-flow/src/main/java/com/demo/config/IntegrationFlowConfig.java
+/home/prachi/Discovery/2026_3/spring-dsl-flow/src/main/java/com/demo/controller/MessageController.java
+/home/prachi/Discovery/2026_3/spring-dsl-flow/src/main/java/com/demo/global/config/LoggingInterceptor.java
+/home/prachi/Discovery/2026_3/spring-dsl-flow/src/main/java/com/demo/model/Message.java
+/home/prachi/Discovery/2026_3/spring-dsl-flow/src/main/java/com/demo/model/ProcessingContext.java
+/home/prachi/Discovery/2026_3/spring-dsl-flow/src/main/java/com/demo/service/FileStorageService.java
