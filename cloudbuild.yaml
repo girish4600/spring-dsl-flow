@@ -5,6 +5,17 @@ steps:
       - clean
       - package
       - -DskipTests
+  - name: ubuntu
+    entrypoint: bash
+    args:
+      - -c
+      - |
+        echo "Current directory:"
+        pwd
+        echo "Contents:"
+        ls -R
+        echo "Target directory:"
+        ls -l 
 
   - name: 'gcr.io/cloud-builders/docker'
     args:
