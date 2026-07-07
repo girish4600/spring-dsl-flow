@@ -1,0 +1,21 @@
+steps:
+
+  - name: 'gcr.io/cloud-builders/mvn'
+    args:
+      - clean
+      - package
+      - -DskipTests
+
+  - name: 'gcr.io/cloud-builders/docker'
+    entrypoint: bash
+    args:
+      - -c
+      - |
+        TAG=$(date +%Y%m%d-%H%M%S)
+        
+        docker build \
+          -t asia-south1-docker.pkg.dev/$PROJECT_ID/gsk-artifacts/spring-dsl-flow:$TAG \
+          -t asia-south1-docker.pkg.dev/$PROJECT_ID/gsk-artifacts/spring-dsl-flow:latest \
+          .
+        docker push asia-south1-docker.pkg.dev/$PROJECT_ID/gsk-artifacts/spring-dsl-flow:$TAG
+        docker push asia-south1-docker.pkg.dev/$PROJECT_ID/gsk-artifacts/spring-dsl-flow:latest
