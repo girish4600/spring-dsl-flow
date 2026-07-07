@@ -15,7 +15,8 @@ steps:
         echo "Contents:"
         ls -R
         cd /workspace/target
-        le -lrt
+        echo "inside : /workspace/target"
+        ls -lrt
         echo "Target directory:"
         ls -l 
 
