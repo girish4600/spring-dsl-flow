@@ -2,7 +2,7 @@ FROM eclipse-temurin:21-jre
 
 WORKDIR /app
 
-COPY /workspace/target/*.jar spring-dsl-flow.jar
+COPY target/*.jar spring-dsl-flow.jar
 
 EXPOSE 8080
 
