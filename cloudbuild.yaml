@@ -1,33 +1,17 @@
 steps:
-
   - name: 'gcr.io/cloud-builders/mvn'
     args:
       - clean
       - package
       - -DskipTests
-  - name: ubuntu
-    entrypoint: bash
-    args:
-      - -c
-      - |
-        echo "Current directory:"
-        pwd
-        echo "Contents:"
-        ls -R
-        cd /workspace/target
-        echo "inside : /workspace/target"
-        ls -lrt
-        echo "Target directory:"
-        ls -l 
-
   - name: 'gcr.io/cloud-builders/docker'
     args:
       - build
       - -t
-      - asia-south1-docker.pkg.dev/$PROJECT_ID/gsk-artifacts/spring-dsl-flow:latest
+      - asia-south1-docker.pkg.dev/$PROJECT_ID/one-step-repo/spring-dsl-flow:latest
       - .
 images:
-  - asia-south1-docker.pkg.dev/$PROJECT_ID/gsk-artifacts/spring-dsl-flow:latest
+  - asia-south1-docker.pkg.dev/$PROJECT_ID/one-step-repo/spring-dsl-flow:latest
 
 options:
   logging: CLOUD_LOGGING_ONLY
