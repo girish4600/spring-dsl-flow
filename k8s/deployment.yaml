@@ -1,0 +1,25 @@
+apiVersion: apps/v1
+kind: Deployment
+metadata:
+  name: spring-dsl-flow
+  namespace: uat1
+  labels:
+    app: spring-dsl-flow
+
+spec:
+  replicas: 2
+  selector:
+    matchLabels:
+      app: spring-dsl-flow
+  template:
+    metadata:
+      name: spring-dsl-flow
+      labels:
+        app: spring-dsl-flow
+    spec:
+      containers:
+        - name: spring-dsl-flow
+          image: asia-south1-docker.pkg.dev/one-step-gcp/one-step-repo/spring-dsl-flow:latest
+          imagePullPolicy: Always
+          ports:
+            - containerPort: 8080
