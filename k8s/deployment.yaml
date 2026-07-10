@@ -22,4 +22,41 @@ spec:
           image: asia-south1-docker.pkg.dev/one-step-gcp/one-step-repo/spring-dsl-flow:latest
           imagePullPolicy: Always
           ports:
-            - containerPort: 8080
+            - name: http
+              containerPort: 8080
+          startupProbe:
+            httpGet:
+              path: /actuator/health
+              port: 8080
+            failureThreshold: 120
+            periodSeconds: 5
+          livenessProbe:
+            httpGet:
+              path: /actuator/health
+              port: 8080
+            failureThreshold: 1
+            periodSeconds: 60
+          resources:
+            requests:
+              memory: "512Mi"
+              cpu: "75m"
+            limits:
+              memory: "1024Mi"
+              cpu: "3000m"
+          securityContext:
+            readOnlyRootFilesystem: true
+            allowPrivilegeEscalation: false
+            capabilities:
+              drop:
+                - all
+          volumeMounts:
+            - mountPath: /tmp
+              name: tmp
+            - mountPath: /var/gsk/files
+              name: files
+      volumes:
+        - name: tmp
+          emptyDir: {}
+        - name: files
+          persistentVolumeClaim:
+            claimName: pvc

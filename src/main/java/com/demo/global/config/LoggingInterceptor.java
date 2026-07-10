@@ -1,6 +1,7 @@
 package com.demo.global.config;
 
 import com.demo.service.FileStorageService;
+import com.demo.service.StorageService;
 import jakarta.annotation.Resource;
 import lombok.extern.slf4j.Slf4j;
 import org.springframework.beans.factory.annotation.Autowired;
@@ -20,7 +21,7 @@ import java.nio.charset.StandardCharsets;
 public class LoggingInterceptor implements ChannelInterceptor {
 
     @Autowired
-    private FileStorageService storage;
+    private StorageService storage;
 
     @Override
     public Message<?> preSend(Message<?> message,
@@ -40,11 +41,7 @@ public class LoggingInterceptor implements ChannelInterceptor {
         String baseName = originalFileName.substring(0, originalFileName.lastIndexOf('.'));
 
         String fileName = baseName + "_" + timestamp + extension;
-
-        System.out.println("fileName :: "+ fileName);
-
         if( loggingId != null && originalId != null) {
-            System.out.println("loggingId :: "+ loggingId);
             log.info("""
                 channel="{}", loggingId="{}", originalId="{}""",
                     channel,
