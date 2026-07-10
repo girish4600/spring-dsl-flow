@@ -1,8 +1,6 @@
 package com.demo.global.config;
 
-import com.demo.service.FileStorageService;
 import com.demo.service.StorageService;
-import jakarta.annotation.Resource;
 import lombok.extern.slf4j.Slf4j;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.integration.channel.DirectChannel;

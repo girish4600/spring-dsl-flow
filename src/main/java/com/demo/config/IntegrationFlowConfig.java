@@ -1,14 +1,11 @@
 package com.demo.config;
 
-import com.demo.model.Message;
-import com.demo.service.FileStorageService;
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
 import org.springframework.context.annotation.Bean;
 import org.springframework.context.annotation.Configuration;
 import org.springframework.integration.channel.DirectChannel;
 import org.springframework.integration.dsl.IntegrationFlow;
-import org.springframework.integration.dsl.MessageChannels;
 import org.springframework.integration.file.FileHeaders;
 
 @Configuration

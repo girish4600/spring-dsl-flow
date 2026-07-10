@@ -1,0 +1,9 @@
+storage:
+  type: gcs
+
+gcp:
+  storage:
+    bucket: spring-dsl-storage
+
+app:
+  env: uat1

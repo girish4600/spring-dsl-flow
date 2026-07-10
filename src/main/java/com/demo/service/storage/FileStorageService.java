@@ -1,15 +1,15 @@
-package com.demo.service;
+package com.demo.service.storage;
 
-import com.demo.model.Message;
+import com.demo.service.StorageService;
 import com.fasterxml.jackson.databind.ObjectMapper;
-import lombok.AllArgsConstructor;
-import lombok.NoArgsConstructor;
 import lombok.extern.slf4j.Slf4j;
+import org.springframework.context.annotation.Profile;
 import org.springframework.stereotype.Service;
 
 import java.io.File;
 
 @Service
+@Profile("local")
 @Slf4j
 public class FileStorageService implements StorageService {
 
