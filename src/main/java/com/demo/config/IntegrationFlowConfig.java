@@ -84,7 +84,7 @@ public class IntegrationFlowConfig {
         SftpMessageHandler handler =
                 new SftpMessageHandler((SessionFactory<SftpClient.DirEntry>) factory);
 
-        handler.setRemoteDirectoryExpressionString("/upload");
+        handler.setRemoteDirectoryExpressionString("'/home/demo/upload'");
 
         return handler;
     }
