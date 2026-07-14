@@ -63,7 +63,7 @@ public class IntegrationFlowConfig {
 
         factory.setPort(22);
 
-        factory.setUser("demo");
+        factory.setUser("nobody");
 
         factory.setPassword("password");
 
@@ -83,9 +83,9 @@ public class IntegrationFlowConfig {
 
         SftpMessageHandler handler =
                 new SftpMessageHandler((SessionFactory<SftpClient.DirEntry>) factory);
-
-        handler.setRemoteDirectoryExpressionString("'/home/demo/upload'");
-
+        handler.setFileNameGenerator(message ->
+                (String) message.getHeaders().get(FileHeaders.FILENAME));
+        handler.setRemoteDirectoryExpressionString("'upload'");
         return handler;
     }
 }
