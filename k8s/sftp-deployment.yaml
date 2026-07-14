@@ -1,0 +1,57 @@
+apiVersion: apps/v1
+kind: Deployment
+metadata:
+  labels:
+    app: sftp-server
+  name: sftp-server
+  namespace: uat1
+spec:
+  replicas: 1
+  selector:
+    matchLabels:
+      app: sftp-server
+  template:
+    metadata:
+      labels:
+        app: sftp-server
+    spec:
+      containers:
+        - name: sftp-server
+          image: atmoz/sftp
+          ports:
+            - containerPort: 22
+          args:
+            - "nobody:password:1001"
+          volumeMounts:
+          - name: sftp-storage
+            mountPath: /home/demo/upload
+          - name: ssh-public-key
+            mountPath: /home/demo/.ssh/keys
+#            subPath: authorized_keys
+      volumes:
+        - name: sftp-storage
+          emptyDir: {}
+        - name: ssh-public-key
+          configMap:
+            name: sftp-public-key
+            
+---
+apiVersion: v1
+
+kind: Service
+
+metadata:
+  name: sftp-service
+  namespace: uat1
+
+spec:
+
+  selector:
+    app: sftp-server
+
+  ports:
+  - protocol: TCP
+    port: 22
+    targetPort: 22
+
+  type: ClusterIP

@@ -4,4 +4,6 @@
 /home/prachi/Discovery/2026_3/spring-dsl-flow/src/main/java/com/demo/global/config/LoggingInterceptor.java
 /home/prachi/Discovery/2026_3/spring-dsl-flow/src/main/java/com/demo/model/Message.java
 /home/prachi/Discovery/2026_3/spring-dsl-flow/src/main/java/com/demo/model/ProcessingContext.java
-/home/prachi/Discovery/2026_3/spring-dsl-flow/src/main/java/com/demo/service/FileStorageService.java
+/home/prachi/Discovery/2026_3/spring-dsl-flow/src/main/java/com/demo/service/StorageService.java
+/home/prachi/Discovery/2026_3/spring-dsl-flow/src/main/java/com/demo/service/storage/FileStorageService.java
+/home/prachi/Discovery/2026_3/spring-dsl-flow/src/main/java/com/demo/service/storage/GcloudStorage.java

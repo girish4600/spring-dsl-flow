@@ -1,0 +1,10 @@
+apiVersion: v1
+kind: ConfigMap
+
+metadata:
+  name: sftp-public-key
+  namespace: uat1
+
+data:
+  authorized_keys: |
+    ssh-rsa AAAAB3NzaC1yc2EAAAADAQABAAABgQDC5CaI+rSJ/ndTF/zGeGY2w8/Svywn3jfEWIUDbLDSTt6UjGP6xn5DqrPPMT1Oe2RLL7VZQ69EHu7Y0g2LocnwqMhr4Vngz3p0d/SPakGcpVrxE8BuYuYznTIUDOdYfhAIa2QQwTirMwiZdoSMPCvC6qot/h2Ul64qKSgmjbM2Vc0ZH9S4qRxfJ5FrUT5kQvOmJ5pcglIIz+xE3K98OEe9NAcbgVN8dOV/O+6NOlVCYrbApWeOIA7lkNCqEH6xRsXMuroBhk9DAu2bAh7UozNi0Je+oArtJ8NKJbUfu+eZHNuKJuIcN9zl2z5M0JdZMC2vNLxGbck5oLWQlWvyj/6O05S5AKcbwIrcYcAAXrqnOhXskOLSpCF8pgPw/706HH1091f8T137wJIB8gYMLeCRbukocv32PnRj1xkiIhfls0P2EcOqq2O8QeWVi1auL5rHxUC/fZSA2dLdsqQQhgH51A60S4PZGS444CQtAwqNV6GGVGw1VfpZGl35+yW7qv8= prachi@prachi-ThinkPad-T570-W10DG

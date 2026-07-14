@@ -1,18 +1,27 @@
 package com.demo.config;
 
+import org.apache.sshd.sftp.client.SftpClient;
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
 import org.springframework.context.annotation.Bean;
 import org.springframework.context.annotation.Configuration;
 import org.springframework.integration.channel.DirectChannel;
 import org.springframework.integration.dsl.IntegrationFlow;
+import org.springframework.integration.dsl.IntegrationFlowBuilder;
 import org.springframework.integration.file.FileHeaders;
+import org.springframework.integration.file.remote.session.CachingSessionFactory;
+import org.springframework.integration.file.remote.session.SessionFactory;
+import org.springframework.integration.sftp.outbound.SftpMessageHandler;
+import org.springframework.integration.sftp.session.DefaultSftpSessionFactory;
+import org.springframework.messaging.MessageHandler;
 
 @Configuration
+//@Import(SftpConfig.class)
 public class IntegrationFlowConfig {
 
     private static final Logger log = LoggerFactory.getLogger(IntegrationFlowConfig.class);
     private static final String FILENAME = "";
+
 
     @Bean
     public DirectChannel inputChannel() {
@@ -20,7 +29,7 @@ public class IntegrationFlowConfig {
     }
 
     @Bean
-    public IntegrationFlow messageFlow() {
+    public IntegrationFlowBuilder messageFlow() {
 
         return IntegrationFlow.from(inputChannel())
                  .enrichHeaders(h -> h
@@ -39,6 +48,44 @@ public class IntegrationFlowConfig {
                 .channel("channel.transformation")
                 .enrichHeaders(h -> h.header("payload", "downstream", true))
                 .channel("channel.delivery")
-                .nullChannel();
+                .handle(sftpHandler(cachingSessionFactory(
+                        sftpSessionFactory())));
+//                .nullChannel();
+    }
+
+    @Bean
+    public DefaultSftpSessionFactory sftpSessionFactory() {
+
+        DefaultSftpSessionFactory factory =
+                new DefaultSftpSessionFactory(true);
+
+        factory.setHost("sftp-service");
+
+        factory.setPort(22);
+
+        factory.setUser("demo");
+
+        factory.setPassword("password");
+
+        return factory;
+    }
+
+    @Bean
+    public CachingSessionFactory<?> cachingSessionFactory(
+            DefaultSftpSessionFactory factory) {
+
+        return new CachingSessionFactory<>(factory);
+    }
+
+    @Bean
+    public MessageHandler sftpHandler(
+            CachingSessionFactory<?> factory) {
+
+        SftpMessageHandler handler =
+                new SftpMessageHandler((SessionFactory<SftpClient.DirEntry>) factory);
+
+        handler.setRemoteDirectoryExpressionString("/upload");
+
+        return handler;
     }
 }
