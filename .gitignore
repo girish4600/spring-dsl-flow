@@ -4,5 +4,6 @@
 
 **/target
 /target
-**/*.log
-
+/target/.*jar
+/target/.*original
+/target/*/*
