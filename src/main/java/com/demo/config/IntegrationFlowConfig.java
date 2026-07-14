@@ -58,7 +58,7 @@ public class IntegrationFlowConfig {
 
         DefaultSftpSessionFactory factory =
                 new DefaultSftpSessionFactory(true);
-
+        factory.setAllowUnknownKeys(true);
         factory.setHost("sftp-service");
 
         factory.setPort(22);
