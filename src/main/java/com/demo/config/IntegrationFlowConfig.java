@@ -7,7 +7,7 @@ import org.springframework.context.annotation.Bean;
 import org.springframework.context.annotation.Configuration;
 import org.springframework.integration.channel.DirectChannel;
 import org.springframework.integration.dsl.IntegrationFlow;
-import org.springframework.integration.dsl.IntegrationFlowBuilder;
+import org.springframework.integration.dsl.StandardIntegrationFlow;
 import org.springframework.integration.file.FileHeaders;
 import org.springframework.integration.file.remote.session.CachingSessionFactory;
 import org.springframework.integration.file.remote.session.SessionFactory;
@@ -29,7 +29,7 @@ public class IntegrationFlowConfig {
     }
 
     @Bean
-    public IntegrationFlowBuilder messageFlow() {
+    public IntegrationFlow messageFlow() {
 
         return IntegrationFlow.from(inputChannel())
                  .enrichHeaders(h -> h
@@ -49,7 +49,7 @@ public class IntegrationFlowConfig {
                 .enrichHeaders(h -> h.header("payload", "downstream", true))
                 .channel("channel.delivery")
                 .handle(sftpHandler(cachingSessionFactory(
-                        sftpSessionFactory())));
+                        sftpSessionFactory()))).get();
 //                .nullChannel();
     }
 
