@@ -21,12 +21,12 @@ spec:
           ports:
             - containerPort: 22
           args:
-            - "nobody:password:1001"
+            - "demo:password:1001"
           volumeMounts:
           - name: sftp-storage
-            mountPath: /home/nobody/upload
+            mountPath: /home/demo/upload
           - name: ssh-public-key
-            mountPath: /home/nobody/.ssh/keys
+            mountPath: /home/demo/.ssh/keys
 #            subPath: authorized_keys
       volumes:
         - name: sftp-storage

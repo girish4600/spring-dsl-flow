@@ -64,7 +64,7 @@ public class IntegrationFlowConfig {
 
         factory.setPort(22);
 
-        factory.setUser("nobody");
+        factory.setUser("demo");
 
         factory.setPassword("password");
 
