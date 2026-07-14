@@ -1,0 +1,8 @@
+# ignore intellij idea files
+.idea
+**/*.iml
+
+**/target
+/target
+**/*.log
+

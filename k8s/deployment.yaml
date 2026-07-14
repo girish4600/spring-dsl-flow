@@ -17,15 +17,16 @@ spec:
       labels:
         app: spring-dsl-flow
     spec:
+      serviceAccountName: spring-storage-sa
       containers:
-        - env:
-            - name: SPRING_PROFILES_ACTIVE
-              value: gcp
         - name: spring-dsl-flow
           image: asia-south1-docker.pkg.dev/one-step-gcp/one-step-repo/spring-dsl-flow:latest
           imagePullPolicy: Always
           ports:
             - containerPort: 8080
+          env:
+            - name: SPRING_PROFILES_ACTIVE
+              value: gcs
 #              name: http
 #          startupProbe:
 #            httpGet:
