@@ -10,3 +10,6 @@ See chat for full implementation.# spring-dsl-flow
 [sftp-deployment.yaml](k8s/sftp-deployment.yaml)
 [deployment.yaml](k8s/deployment.yaml)
 [service.yaml](k8s/service.yaml)
+
+
+kubectl create secret generic sftp-private-key --from-file=id_rsa=/home/prachi/.ssh/id_rsa  -n uat1

@@ -4,5 +4,6 @@ server:
 logging:
   level:
     root: INFO
-    org.springframework.integration.sftp: TRACE
-    org.apache.sshd: DEBUG
+#    enable below if we need to log/see the errors related to sftp connection
+#    org.springframework.integration.sftp: TRACE
+#    org.apache.sshd: DEBUG
