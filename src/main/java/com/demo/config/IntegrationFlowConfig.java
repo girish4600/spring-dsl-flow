@@ -5,6 +5,7 @@ import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
 import org.springframework.context.annotation.Bean;
 import org.springframework.context.annotation.Configuration;
+import org.springframework.expression.common.LiteralExpression;
 import org.springframework.integration.channel.DirectChannel;
 import org.springframework.integration.dsl.IntegrationFlow;
 import org.springframework.integration.dsl.StandardIntegrationFlow;
@@ -85,7 +86,9 @@ public class IntegrationFlowConfig {
                 new SftpMessageHandler((SessionFactory<SftpClient.DirEntry>) factory);
         handler.setFileNameGenerator(message ->
                 (String) message.getHeaders().get(FileHeaders.FILENAME));
-        handler.setRemoteDirectoryExpressionString("'upload'");
+//        handler.setRemoteDirectoryExpressionString("'upload'");
+        handler.setRemoteDirectoryExpression(new LiteralExpression("."));
         return handler;
+
     }
 }

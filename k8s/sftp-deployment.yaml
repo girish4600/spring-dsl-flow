@@ -24,9 +24,9 @@ spec:
             - "nobody:password:1001"
           volumeMounts:
           - name: sftp-storage
-            mountPath: /home/demo/upload
+            mountPath: /home/nobody/upload
           - name: ssh-public-key
-            mountPath: /home/demo/.ssh/keys
+            mountPath: /home/nobody/.ssh/keys
 #            subPath: authorized_keys
       volumes:
         - name: sftp-storage
