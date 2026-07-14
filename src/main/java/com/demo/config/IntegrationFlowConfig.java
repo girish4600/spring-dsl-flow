@@ -5,6 +5,7 @@ import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
 import org.springframework.context.annotation.Bean;
 import org.springframework.context.annotation.Configuration;
+import org.springframework.core.io.FileSystemResource;
 import org.springframework.expression.common.LiteralExpression;
 import org.springframework.integration.channel.DirectChannel;
 import org.springframework.integration.dsl.IntegrationFlow;
@@ -66,8 +67,10 @@ public class IntegrationFlowConfig {
 
         factory.setUser("demo");
 
-        factory.setPassword("password");
-
+//        factory.setPassword("password");
+        factory.setPrivateKey(
+                new FileSystemResource("/home/prachi/.ssh/id_rsa")
+        );
         return factory;
     }
 
