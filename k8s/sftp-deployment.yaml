@@ -15,9 +15,11 @@ spec:
       labels:
         app: sftp-server
     spec:
+      securityContext:
+        fsGroup: 1001
       containers:
         - name: sftp-server
-          image: atmoz/sftp
+          image: atmoz/sftp:latest
           ports:
             - containerPort: 22
           args:

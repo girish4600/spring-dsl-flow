@@ -86,8 +86,8 @@ public class IntegrationFlowConfig {
                 new SftpMessageHandler((SessionFactory<SftpClient.DirEntry>) factory);
         handler.setFileNameGenerator(message ->
                 (String) message.getHeaders().get(FileHeaders.FILENAME));
-//        handler.setRemoteDirectoryExpressionString("'upload'");
-        handler.setRemoteDirectoryExpression(new LiteralExpression("."));
+        handler.setRemoteDirectoryExpressionString("'upload'");
+//        handler.setRemoteDirectoryExpression(new LiteralExpression("."));
         return handler;
 
     }
