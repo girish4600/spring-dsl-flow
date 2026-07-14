@@ -69,7 +69,7 @@ public class IntegrationFlowConfig {
 
 //        factory.setPassword("password");
         factory.setPrivateKey(
-                new FileSystemResource("/home/prachi/.ssh/id_rsa")
+                new FileSystemResource("/etc/ssh/id_rsa")
         );
         return factory;
     }

@@ -27,6 +27,14 @@ spec:
           env:
             - name: SPRING_PROFILES_ACTIVE
               value: gcs
+          volumeMounts:
+            - name: sftp-private-key
+              mountPath: /etc/ssh
+              readOnly: true
+      volumes:
+        - name: sftp-private-key
+          secret:
+            secretName: sftp-private-key
 #              name: http
 #          startupProbe:
 #            httpGet:

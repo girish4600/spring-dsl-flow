@@ -2,4 +2,10 @@ server:
   port: 8080
 
 app:
-  env: LOCAL
+  env: local
+
+
+
+sftp:
+  host: localhost
+  port: 2222
