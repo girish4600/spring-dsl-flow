@@ -5,7 +5,20 @@ app:
   env: local
 
 
-
 sftp:
   host: localhost
-  port: 2222
+  key: /home/prachi/.ssh/id_rsa
+
+---
+#spring.profiles.active=local
+spring:
+  config:
+    activate:
+      on-profile: local
+  autoconfigure:
+    exclude:
+      - com.google.cloud.spring.autoconfigure.core.GcpContextAutoConfiguration
+  cloud:
+    gcp:
+      secretmanager:
+        enabled: false # Disables GCP lookup for local runs by default

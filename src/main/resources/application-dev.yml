@@ -5,5 +5,12 @@ gcp:
   storage:
     bucket: spring-dsl-storage
 
+outbound:
+  sftp: sftp://demo@sftp-service/upload
+
 app:
   env: uat1
+
+sftp:
+  host: sftp-service
+  key: /etc/ssh/id_rsa
