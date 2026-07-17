@@ -11,7 +11,7 @@ import java.nio.file.Paths;
 @Profile({"default", "local", "k8s", "gcs"}) // Active locally or if mounted in k8s via files
 public class FileSecretProvider implements SecretProvider {
 
-    @Value("${sftp.key:${user.home}/.ssh/id_rsa}")
+    @Value("${sftp.key:/etc/ssh/id_rsa}")
     private String privateKeyPath;
 
     @Override
