@@ -2,11 +2,14 @@ package com.demo.config;
 
 import com.demo.sercret.SecretProvider;
 import com.demo.sftp.SftpSessionConfiguration;
+import jakarta.annotation.Resource;
 import lombok.extern.slf4j.Slf4j;
 import org.apache.sshd.sftp.client.SftpClient;
+import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.beans.factory.annotation.Value;
 import org.springframework.context.annotation.Bean;
 import org.springframework.context.annotation.Configuration;
+import org.springframework.context.annotation.Import;
 import org.springframework.expression.common.LiteralExpression;
 import org.springframework.integration.file.FileHeaders;
 import org.springframework.integration.file.remote.session.CachingSessionFactory;
@@ -25,11 +28,8 @@ public class EndPointConfig {
     @Value("${outbound.sftp}")
     private String uri;
 
+    @Autowired
     private SecretProvider secretProvider;
-
-    public EndPointConfig(SecretProvider secretProvider){
-        this.secretProvider = secretProvider;
-    }
 
     private SftpSessionConfiguration sftpSessionFactory(URI uri) {
         return new SftpSessionConfiguration(uri, this.secretProvider);
