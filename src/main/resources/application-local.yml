@@ -4,6 +4,8 @@ server:
 app:
   env: local
 
+outbound:
+  sftp: sftp://user@localhost:2222/home/prachi/Discovery/2026_3/spring-dsl-flow/src
 
 sftp:
   host: localhost

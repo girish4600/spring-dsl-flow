@@ -2,14 +2,12 @@ package com.demo.config;
 
 import com.demo.sercret.SecretProvider;
 import com.demo.sftp.SftpSessionConfiguration;
-import jakarta.annotation.Resource;
 import lombok.extern.slf4j.Slf4j;
 import org.apache.sshd.sftp.client.SftpClient;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.beans.factory.annotation.Value;
 import org.springframework.context.annotation.Bean;
 import org.springframework.context.annotation.Configuration;
-import org.springframework.context.annotation.Import;
 import org.springframework.expression.common.LiteralExpression;
 import org.springframework.integration.file.FileHeaders;
 import org.springframework.integration.file.remote.session.CachingSessionFactory;
