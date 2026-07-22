@@ -3,6 +3,7 @@ package com.demo.config;
 import org.apache.sshd.sftp.client.SftpClient;
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
+import org.springframework.beans.factory.annotation.Value;
 import org.springframework.context.annotation.Bean;
 import org.springframework.context.annotation.Configuration;
 import org.springframework.core.io.FileSystemResource;
@@ -17,6 +18,9 @@ import org.springframework.integration.sftp.outbound.SftpMessageHandler;
 import org.springframework.integration.sftp.session.DefaultSftpSessionFactory;
 import org.springframework.messaging.MessageHandler;
 
+import java.net.URI;
+import java.net.URISyntaxException;
+
 @Configuration
 //@Import(SftpConfig.class)
 public class IntegrationFlowConfig {
@@ -24,6 +28,8 @@ public class IntegrationFlowConfig {
     private static final Logger log = LoggerFactory.getLogger(IntegrationFlowConfig.class);
     private static final String FILENAME = "";
 
+    @Value("${outbound.sftp}")
+    private String uri;
 
     @Bean
     public DirectChannel inputChannel() {
@@ -57,15 +63,21 @@ public class IntegrationFlowConfig {
 
     @Bean
     public DefaultSftpSessionFactory sftpSessionFactory() {
-
+        log.info("using Sftp {}", uri);
+        URI uri1=null;
+        try {
+             uri1  = new URI(uri);
+        } catch (URISyntaxException e) {
+            throw new RuntimeException(e);
+        }
         DefaultSftpSessionFactory factory =
                 new DefaultSftpSessionFactory(true);
         factory.setAllowUnknownKeys(true);
-        factory.setHost("sftp-service");
+        factory.setHost(uri1.getHost());
 
         factory.setPort(22);
 
-        factory.setUser("demo");
+        factory.setUser(uri1.getUserInfo());
 
 //        factory.setPassword("password");
         factory.setPrivateKey(
