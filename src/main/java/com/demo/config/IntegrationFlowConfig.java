@@ -28,7 +28,7 @@ public class IntegrationFlowConfig {
     private static final Logger log = LoggerFactory.getLogger(IntegrationFlowConfig.class);
     private static final String FILENAME = "";
 
-    @Value("${outbound.sftp}")
+    @Value("${outbound.sftpDest:sftp://demo@sftp-service}")
     private String uri;
 
     @Bean
@@ -53,7 +53,7 @@ public class IntegrationFlowConfig {
                 .channel("channel.header.enrichment")
                 .enrichHeaders(h -> h.header("payload", "enriched", true))
                 // Transformation
-                .channel("channel.transformation")
+                .channel("channeloutbound.transformation")
                 .enrichHeaders(h -> h.header("payload", "downstream", true))
                 .channel("channel.delivery")
                 .handle(sftpHandler(cachingSessionFactory(

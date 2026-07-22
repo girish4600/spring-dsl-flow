@@ -4,6 +4,32 @@ server:
 logging:
   level:
     root: INFO
+    org.springframework.integration.endpoint.EventDrivenConsumer: WARN
+    org.springframework.integration.channel.DirectChannel: WARN
+    org.apache.sshd.server.keyprovider.SimpleGeneratorHostKeyProvider: WARN
+    org.apache.sshd.client.keyverifier.AcceptAllServerKeyVerifier: ERROR
+    org.apache.sshd.server.session.ServerSessionImpl: WARN
+  pattern:
+    console: "%clr(%d{yyyy-MM-dd HH:mm:ss.SSS}){faint} %clr(%5p) %clr [%t] %clr(%logger{36}){cyan} : %m%n"
+#logging:
+#  pattern:
+#    console: "%clr(%d{yyyy-MM-dd HH:mm:ss.SSS}){faint} %clr(%logger{36}){cyan} : %m%n"
+
 #    enable below if we need to log/see the errors related to sftp connection
-#    org.springframework.integration.sftp: TRACE
-#    org.apache.sshd: DEBUG
+#    org:
+#      springframework:
+#        integration: DEBUG
+#        integration.sftp: DEBUG
+#      apache:
+#        sshd: DEBUG
+
+
+spring:
+  profiles:
+    active: local
+  main:
+    banner-mode: "OFF"
+  cloud:
+    gcp:
+      secretmanager:
+        enabled: false # Disables GCP lookup for local runs by default

@@ -4,8 +4,24 @@ server:
 app:
   env: local
 
-
+#outbound:
+#  sftp: sftp://user@localhost:2222/home/prachi/Discovery/2026_3/spring-dsl-flow/src
 
 sftp:
   host: localhost
+  key: /home/prachi/.ssh/id_rsa
   port: 2222
+
+---
+#spring.profiles.active=local
+spring:
+  config:
+    activate:
+      on-profile: local
+  autoconfigure:
+    exclude:
+      - com.google.cloud.spring.autoconfigure.core.GcpContextAutoConfiguration
+  cloud:
+    gcp:
+      secretmanager:
+        enabled: false # Disables GCP lookup for local runs by default
