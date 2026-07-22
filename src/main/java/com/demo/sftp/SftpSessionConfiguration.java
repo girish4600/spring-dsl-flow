@@ -8,6 +8,7 @@ import org.springframework.beans.factory.annotation.Value;
 import org.springframework.core.io.ByteArrayResource;
 import org.springframework.integration.file.remote.session.SessionFactory;
 import org.springframework.integration.sftp.session.DefaultSftpSessionFactory;
+import org.springframework.stereotype.Component;
 import org.springframework.util.MultiValueMap;
 import org.springframework.web.util.UriComponentsBuilder;
 
@@ -15,6 +16,7 @@ import java.net.URI;
 import java.nio.charset.StandardCharsets;
 
 @Slf4j
+@Component
 public class SftpSessionConfiguration extends DefaultSftpSessionFactory implements SessionFactory<SftpClient.DirEntry>{
 
     private URI uri;
@@ -63,9 +65,9 @@ public class SftpSessionConfiguration extends DefaultSftpSessionFactory implemen
             }
         }*/
 
-        if(privateKey!=null){
+       /* if(privateKey!=null){
             setPrivateKey(new ByteArrayResource("secrete--from gke".getBytes()));
-        }
+        }*/
         setAllowUnknownKeys(true);
 
         setTimeout(1000 * 60 *10);

@@ -3,10 +3,10 @@ storage:
 
 gcp:
   storage:
-    bucket: spring-dsl-storage
+    bucket: one-step-bucket
 
 outbound:
-  sftpDest: "sftp://demo@sftp-service"
+  sftp: sftp://demo@sftp-service/upload
 
 app:
   env: uat1

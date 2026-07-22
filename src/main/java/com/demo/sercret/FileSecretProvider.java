@@ -7,8 +7,8 @@ import java.io.IOException;
 import java.nio.file.Files;
 import java.nio.file.Paths;
 
-//@Component
-@Profile({"default", "local", "k8s", "gcs"}) // Active locally or if mounted in k8s via files
+@Component
+@Profile({"default", "local", "k8s"}) // Active locally or if mounted in k8s via files
 public class FileSecretProvider implements SecretProvider {
 
     @Value("${sftp.key:/etc/ssh/id_rsa}")
