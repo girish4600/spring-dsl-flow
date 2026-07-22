@@ -16,16 +16,9 @@ import java.net.URI;
 import java.nio.charset.StandardCharsets;
 
 @Slf4j
-@Component
 public class SftpSessionConfiguration extends DefaultSftpSessionFactory implements SessionFactory<SftpClient.DirEntry>{
 
     private URI uri;
-
-    @Value("${sftp.key:~/.ssh/id_rsa")
-    private String key;
-
-    @Autowired
-    private SecretProvider secretProvider;
 
     public SftpSessionConfiguration(URI uri, SecretProvider secretProvider){
         this.uri=uri;

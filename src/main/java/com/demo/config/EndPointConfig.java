@@ -26,6 +26,9 @@ public class EndPointConfig {
     @Value("${outbound.sftp}")
     private String uri;
 
+    @Value("${sftp.key:~/.ssh/id_rsa")
+    private String key;
+
     @Autowired
     private SecretProvider secretProvider;
 
@@ -45,7 +48,7 @@ public class EndPointConfig {
 
     @Bean
     public MessageHandler sftpHandler(CachingSessionFactory<SftpClient.DirEntry> factory) {
-        log.info("using Sftp {}", uri);
+        log.info(" {}", uri);
         SftpMessageHandler handler =
                 new SftpMessageHandler(factory);
 
