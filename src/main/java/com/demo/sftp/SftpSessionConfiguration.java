@@ -23,16 +23,23 @@ public class SftpSessionConfiguration extends DefaultSftpSessionFactory implemen
     public SftpSessionConfiguration(URI uri, SecretProvider secretProvider){
         this.uri=uri;
         setHost(uri.getHost());
+        log.info("setHost: {}", uri.getHost());
         int port = uri.getPort() != -1 ? uri.getPort(): 22;
+        log.info("port: {}", port);
         setPort(port);
         setUser(uri.getUserInfo());
+        log.info("User: {}", uri.getUserInfo());
         MultiValueMap<String, String> parameters = UriComponentsBuilder.fromUri(uri).build().getQueryParams();
         String passwordName = parameters.getFirst("passwordName");
         if(passwordName != null){
             setPassword("password");//get password from secrets
         }
         String privateKey = parameters.getFirst("privateKey");
-        setPrivateKey(new ByteArrayResource(secretProvider.getPrivateKey()
+        String key = secretProvider.getPrivateKey();
+
+        log.info("Secret First line: {}", key.lines().findFirst().orElse("EMPTY"));
+        log.info("Length: {}", key.length());
+        setPrivateKey(new ByteArrayResource(key
                 .getBytes(StandardCharsets.UTF_8)));
        /* if(privateKey == null && passwordName == null){
             privateKey = "id_rsa";
