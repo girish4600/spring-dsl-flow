@@ -28,7 +28,7 @@ public class IntegrationFlowConfig {
     private static final Logger log = LoggerFactory.getLogger(IntegrationFlowConfig.class);
     private static final String FILENAME = "";
 
-    @Value("${outbound.sftpDest:sftp://demo@sftp-service}")
+    @Value("${outbound.sftpDest}")
     private String uri;
 
     @Bean
