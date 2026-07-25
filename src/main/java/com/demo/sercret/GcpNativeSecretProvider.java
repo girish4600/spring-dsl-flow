@@ -6,7 +6,7 @@ import org.springframework.context.annotation.Profile;
 import org.springframework.stereotype.Component;
 
 @Component
-@Profile("gcs")
+@Profile("gcs-sm")
 @Slf4j // Active when deployed in GCP environment
 public class GcpNativeSecretProvider implements SecretProvider {
 
