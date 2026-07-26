@@ -36,11 +36,18 @@ steps:
         VERSION=$(cat /workspace/image-tag.txt)
         git config --global user.name "Cloud Build"
         git config --global user.email "noreply@company.com"
-        
+        echo "Updating tag in kustomization"
         # Update uat1 overlay with new image tag
         sed -i "s/newTag:.*/newTag: \"$$VERSION\"/" k8s/overlays/uat1/kustomization.yaml
-
+        echo "Replaced tag in kustomization"
+        grep newTag k8s/overlays/uat1/kustomization.yaml
+        
+        echo "Branch from trigger: ${BRANCH_NAME}"
+        git branch -a
+        git status
+        
         # Commit and push
+        git checkout -B ${BRANCH_NAME}
         git add k8s/overlays/uat1/kustomization.yaml
         git commit -m "Update uat1 image tag to $${VERSION}
 
