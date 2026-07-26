@@ -9,7 +9,7 @@ resources:
 images:
   - name: spring-dsl-flow
     newName: asia-south1-docker.pkg.dev/one-step-gcp/one-step-repo/spring-dsl-flow
-    newTag: "20260726-063247"  # ⬅️ Your date-timestamp tag here
+    newTag: "GCP-5-20260726-153709"
 
 # Add environment label
 commonLabels:
