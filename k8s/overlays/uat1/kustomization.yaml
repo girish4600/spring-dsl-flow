@@ -1,0 +1,16 @@
+apiVersion: kustomize.config.k8s.io/v1beta1
+kind: Kustomization
+
+# Reference the base
+resources:
+  - ../../base
+
+# Override the image tag (this is what Cloud Build will update)
+images:
+  - name: spring-dsl-flow
+    newName: asia-south1-docker.pkg.dev/one-step-gcp/one-step-repo/spring-dsl-flow
+    newTag: "20260726-063247"  # ⬅️ Your date-timestamp tag here
+
+# Add environment label
+commonLabels:
+  environment: uat1

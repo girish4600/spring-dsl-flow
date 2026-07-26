@@ -20,7 +20,7 @@ spec:
       serviceAccountName: spring-storage-sa
       containers:
         - name: spring-dsl-flow
-          image: asia-south1-docker.pkg.dev/one-step-gcp/one-step-repo/spring-dsl-flow:latest
+          image: spring-dsl-flow:latest
           imagePullPolicy: Always
           ports:
             - containerPort: 8080

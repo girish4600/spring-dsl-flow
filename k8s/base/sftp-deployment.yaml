@@ -39,21 +39,15 @@ spec:
             
 ---
 apiVersion: v1
-
 kind: Service
-
 metadata:
   name: sftp-service
   namespace: uat1
-
 spec:
-
   selector:
     app: sftp-server
-
   ports:
   - protocol: TCP
     port: 22
     targetPort: 22
-
   type: ClusterIP

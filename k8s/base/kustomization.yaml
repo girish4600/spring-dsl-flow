@@ -1,0 +1,22 @@
+apiVersion: kustomize.config.k8s.io/v1beta1
+kind: Kustomization
+resources:
+  - namespace.yaml
+  - configMap.yaml
+  - sftp-deployment.yaml
+  - service-account.yaml
+  - privatekey.yaml
+  - deployment.yaml
+  - service.yaml
+#asia-south1-docker.pkg.dev/one-step-gcp/one-step-repo/
+
+# ⬅️ ADD THIS SECTION - Image Management
+#images:
+#  - name: spring-dsl-flow                          # Must match deployment.yaml
+#    newName: asia-south1-docker.pkg.dev/one-step-gcp/one-step-repo/spring-dsl-flow   # Full registry path
+##    newTag: '123456'
+
+# Optional: Add labels to all resources
+commonLabels:
+  app: spring-dsl-flow
+  managed-by: kustomize
