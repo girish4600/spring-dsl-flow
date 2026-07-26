@@ -11,7 +11,7 @@ steps:
       - -c
       - |
         TIMESTAMP=$(date +%Y%m%d-%H%M%S)
-        SAFE_BRANCH=$(echo "${BRANCH_NAME,,}" | tr '/' '-')
+        SAFE_BRANCH=$(echo "${BRANCH_NAME}" | tr '/' '-')
         
         if [ "${BRANCH_NAME}" = "main" ]; then
          VERSION="$$TIMESTAMP"
