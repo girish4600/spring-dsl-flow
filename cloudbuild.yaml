@@ -30,12 +30,17 @@ steps:
   - name:  'gcr.io/cloud-builders/git'
     id: 'update-kustomization'
     entrypoint: bash
+    secretEnv:
+      - GITHUB_TOKEN
     args:
       - '-c'
       - |
         VERSION=$(cat /workspace/image-tag.txt)
         git config --global user.name "Cloud Build"
         git config --global user.email "noreply@company.com"
+        git remote set-url origin \
+        https://x-access-token:$$GITHUB_TOKEN@github.com/girish4600/spring-dsl-flow.git
+
         echo "Updating tag in kustomization"
         # Update uat1 overlay with new image tag
         sed -i "s/newTag:.*/newTag: \"$$VERSION\"/" k8s/overlays/uat1/kustomization.yaml
@@ -44,20 +49,31 @@ steps:
         
         echo "Branch from trigger: ${BRANCH_NAME}"
         git branch -a
+        echo "================= Git Status ================="
         git status
         
         # Commit and push
-        git checkout -B ${BRANCH_NAME}
+        echo "================= Git fetch origin ================="
+        git fetch origin
+  
+        git checkout ${BRANCH_NAME} || git checkout -b ${BRANCH_NAME} origin/${BRANCH_NAME}
         git add k8s/overlays/uat1/kustomization.yaml
+        echo "================= post git add Git Status ================="
+        git status
         git commit -m "Update uat1 image tag to $${VERSION}
 
         Build ID: ${BUILD_ID}
         Commit SHA: ${COMMIT_SHA}" || echo "No changes to commit"
-
-        git push origin ${BRANCH_NAME}
+        echo "================= Git push origin ================="
+        git push origin HEAD:${BRANCH_NAME}
 # we will use this later with substitution variable
 #images:
 #  - asia-south1-docker.pkg.dev/$PROJECT_ID/one-step-repo/spring-dsl-flow:latest
 
 options:
   logging: CLOUD_LOGGING_ONLY
+
+availableSecrets:
+  secretManager:
+    - versionName: projects/$PROJECT_ID/secrets/github-pat/versions/latest
+      env: GITHUB_TOKEN
