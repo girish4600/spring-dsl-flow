@@ -14,12 +14,12 @@ steps:
         SAFE_BRANCH=$(echo "${BRANCH_NAME}" | tr '/' '-')
         
         if [ "${BRANCH_NAME}" = "main" ]; then
-         VERSION="$TIMESTAMP"
+         VERSION="$$TIMESTAMP"
         else
-         VERSION="${SAFE_BRANCH}-${TIMESTAMP}"
+         VERSION="$${SAFE_BRANCH}-$${TIMESTAMP}"
         fi
-        echo "Using image tag: $VERSION"
-        echo "$VERSION" > /workspace/image-tag.txt
+        echo "Using image tag: $$VERSION"
+        echo "$$VERSION" > /workspace/image-tag.txt
         docker build \
           -t asia-south1-docker.pkg.dev/$PROJECT_ID/one-step-repo/spring-dsl-flow:latest \
           -t asia-south1-docker.pkg.dev/$PROJECT_ID/one-step-repo/spring-dsl-flow:$$VERSION \
@@ -38,11 +38,11 @@ steps:
         git config --global user.email "noreply@company.com"
         
         # Update uat1 overlay with new image tag
-        sed -i "s/newTag:.*/newTag: \"$VERSION\"/" k8s/overlays/uat1/kustomization.yaml
+        sed -i "s/newTag:.*/newTag: \"$$VERSION\"/" k8s/overlays/uat1/kustomization.yaml
 
         # Commit and push
         git add k8s/overlays/uat1/kustomization.yaml
-        git commit -m "Update uat1 image tag to ${VERSION}
+        git commit -m "Update uat1 image tag to $${VERSION}
 
         Build ID: ${BUILD_ID}
         Commit SHA: ${COMMIT_SHA}" || echo "No changes to commit"
