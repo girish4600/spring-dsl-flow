@@ -5,13 +5,22 @@ steps:
       - package
       - -DskipTests
   - name: 'gcr.io/cloud-builders/docker'
+    entrypoint: bash
     args:
-      - build
-      - -t
-      - asia-south1-docker.pkg.dev/$PROJECT_ID/one-step-repo/spring-dsl-flow:latest
-      - .
-images:
-  - asia-south1-docker.pkg.dev/$PROJECT_ID/one-step-repo/spring-dsl-flow:latest
+      - -c
+      - |
+        TAG=$(date +%Y%m%d-%H%M%S)
+
+        docker build \
+          -t asia-south1-docker.pkg.dev/$PROJECT_ID/one-step-repo/spring-dsl-flow:latest \
+          -t asia-south1-docker.pkg.dev/$PROJECT_ID/one-step-repo/spring-dsl-flow:$$TAG \
+          .
+        docker push asia-south1-docker.pkg.dev/$PROJECT_ID/one-step-repo/spring-dsl-flow:latest
+        docker push asia-south1-docker.pkg.dev/$PROJECT_ID/one-step-repo/spring-dsl-flow:$$TAG
+
+# we will use this later with substitution variable
+#images:
+#  - asia-south1-docker.pkg.dev/$PROJECT_ID/one-step-repo/spring-dsl-flow:latest
 
 options:
   logging: CLOUD_LOGGING_ONLY

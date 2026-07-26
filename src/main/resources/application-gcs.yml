@@ -1,0 +1,16 @@
+storage:
+  type: gcs
+
+gcp:
+  storage:
+    bucket: one-step-bucket
+
+outbound:
+  sftp: sftp://demo@sftp-service/upload
+
+app:
+  env: uat1
+
+sftp:
+  host: sftp-service
+  key: /etc/ssh/id_rsa
